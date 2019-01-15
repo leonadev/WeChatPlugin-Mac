@@ -15,6 +15,7 @@ FOUNDATION_EXPORT double WeChatPluginVersionNumber;
 FOUNDATION_EXPORT const unsigned char WeChatPluginVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <WeChatPlugin/PublicHeader.h>
+#import "AddMsg.h"
 
 @interface MessageData : NSObject
 - (id)initWithMsgType:(long long)arg1;

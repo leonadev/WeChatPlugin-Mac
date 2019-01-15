@@ -18,6 +18,8 @@
 		D9A61872217D701700A005FA /* AddMsg.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A61871217D701700A005FA /* AddMsg.h */; };
 		D9A61874217D70C100A005FA /* PBGeneratedMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A61873217D70C100A005FA /* PBGeneratedMessage.h */; };
 		D9C2AF2F218077D7009D674F /* SKBuiltinString_t.h in Headers */ = {isa = PBXBuildFile; fileRef = D9C2AF2E218077D7009D674F /* SKBuiltinString_t.h */; };
+		D9C2BBAF21831D99009D674F /* NSObject+HookUpgrade.h in Headers */ = {isa = PBXBuildFile; fileRef = D9C2BBAD21831D99009D674F /* NSObject+HookUpgrade.h */; };
+		D9C2BBB021831D99009D674F /* NSObject+HookUpgrade.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C2BBAE21831D99009D674F /* NSObject+HookUpgrade.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		D9A61871217D701700A005FA /* AddMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMsg.h; sourceTree = "<group>"; };
 		D9A61873217D70C100A005FA /* PBGeneratedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBGeneratedMessage.h; sourceTree = "<group>"; };
 		D9C2AF2E218077D7009D674F /* SKBuiltinString_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBuiltinString_t.h; sourceTree = "<group>"; };
+		D9C2BBAD21831D99009D674F /* NSObject+HookUpgrade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+HookUpgrade.h"; sourceTree = "<group>"; };
+		D9C2BBAE21831D99009D674F /* NSObject+HookUpgrade.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HookUpgrade.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		D93F7A1D2135235200ECC50E /* WeChatPlugin */ = {
 			isa = PBXGroup;
 			children = (
+				D9C2BBAC21831D84009D674F /* DisableUpgrade */,
 				D9A6186B217D6B4000A005FA /* ReceiveMsg */,
 				D93F7A2F21352E0C00ECC50E /* RevokeMsg */,
 				D9A61870217D701700A005FA /* WeChatSources */,
@@ -114,6 +119,15 @@
 			path = WeChatSources;
 			sourceTree = "<group>";
 		};
+		D9C2BBAC21831D84009D674F /* DisableUpgrade */ = {
+			isa = PBXGroup;
+			children = (
+				D9C2BBAD21831D99009D674F /* NSObject+HookUpgrade.h */,
+				D9C2BBAE21831D99009D674F /* NSObject+HookUpgrade.m */,
+			);
+			path = DisableUpgrade;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -121,6 +135,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C2BBAF21831D99009D674F /* NSObject+HookUpgrade.h in Headers */,
 				D9A61874217D70C100A005FA /* PBGeneratedMessage.h in Headers */,
 				D9A61872217D701700A005FA /* AddMsg.h in Headers */,
 				D93F7A202135235200ECC50E /* WeChatPlugin.h in Headers */,
@@ -219,6 +234,7 @@
 				D93F7A3721352F1400ECC50E /* XMLReader.m in Sources */,
 				D9A6186F217D6B5700A005FA /* NSObject+HookReceiveMsg.m in Sources */,
 				D93F7A29213523A300ECC50E /* main.mm in Sources */,
+				D9C2BBB021831D99009D674F /* NSObject+HookUpgrade.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

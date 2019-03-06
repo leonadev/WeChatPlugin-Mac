@@ -28,10 +28,11 @@
         if ([msg isKindOfClass:objc_getClass("AddMsg")]) {
             AddMsg *addMsg = msg;
             if (addMsg.msgType == 49) {
-                if ([addMsg.content.string containsString:@"微信红包"]) {
+                if ([addMsg.content.string containsString:@"[微信红包]"]) {
                     NSUserNotification *notification = [[NSUserNotification alloc] init];
                     [notification setTitle:@"微信"];
-                    [notification setSubtitle:@"嘿！您有一条新的微信消息"];
+                    [notification setSubtitle:@"红包来啦！"];
+                    [notification setSoundName:@"alert"];
                     NSUserNotificationCenter *userNotificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
                     [userNotificationCenter scheduleNotification:notification];
                 }

@@ -20,7 +20,9 @@ MacWeChatPlugin
 ------
 安装：
 
-下载打开工程，先进行Build(`command+B`)，然后Run(`command+R`)，此时会启动微信并完成注入，之后Stop并关闭工程，重新打开微信即可。
+下载并打开工程，Edit Scheme，Executable 如果为 None，则更改一下指向/Applications/WeChat.app，否则无法执行Run操作。
+
+先进行Build(`command+B`)，然后Run(`command+R`)，此时会启动微信并完成注入，之后Stop并关闭工程，重新打开微信即可。
 
 卸载：
 

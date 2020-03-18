@@ -14,11 +14,6 @@
 @implementation NSObject (HookUpgrade)
 
 + (void)hookUpgrade {
-    hookMethod(objc_getClass("WeChat"),
-               @selector(checkForUpdates),
-               [self class],
-               @selector(_hook_checkForUpdates)
-               );
     
     if ([PluginUtils isVersionNewerThan:@"2.3.24"]) {
         hookMethod(objc_getClass("WeChat"),
@@ -32,6 +27,12 @@
                    @selector(_hook_sparkleUpdater)
                    );
     } else {
+        hookMethod(objc_getClass("WeChat"),
+                   @selector(checkForUpdates),
+                   [self class],
+                   @selector(_hook_checkForUpdates)
+                   );
+        
         hookMethod(objc_getClass("WeChat"),
                    @selector(checkForUpdatesInBackground),
                    [self class],

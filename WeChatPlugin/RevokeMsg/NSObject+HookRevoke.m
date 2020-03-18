@@ -2,7 +2,7 @@
 //  NSObject+HookRevoke.m
 //  WeChatPlugin
 //
-//  Created by Leon on 2018/8/28.
+//  Created by leonadev on 2018/8/28.
 //  Copyright © 2018年 leonadev. All rights reserved.
 //
 

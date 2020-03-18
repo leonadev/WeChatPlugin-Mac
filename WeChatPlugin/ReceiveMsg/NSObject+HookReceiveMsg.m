@@ -2,7 +2,7 @@
 //  NSObject+HookReceiveMsg.m
 //  WeChatPlugin
 //
-//  Created by pandatv on 2018/10/22.
+//  Created by leonadev on 2018/10/22.
 //  Copyright © 2018年 leonadev. All rights reserved.
 //
 

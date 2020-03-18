@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35DDEFAD240F434100D2A753 /* PluginUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 35DDEFAB240F434100D2A753 /* PluginUtils.h */; };
+		35DDEFAE240F434100D2A753 /* PluginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DDEFAC240F434100D2A753 /* PluginUtils.m */; };
 		D93F7A202135235200ECC50E /* WeChatPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D93F7A1E2135235200ECC50E /* WeChatPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D93F7A29213523A300ECC50E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = D93F7A28213523A300ECC50E /* main.mm */; };
 		D93F7A3221352E4800ECC50E /* NSObject+HookRevoke.h in Headers */ = {isa = PBXBuildFile; fileRef = D93F7A3021352E4800ECC50E /* NSObject+HookRevoke.h */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35DDEFAB240F434100D2A753 /* PluginUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginUtils.h; sourceTree = "<group>"; };
+		35DDEFAC240F434100D2A753 /* PluginUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginUtils.m; sourceTree = "<group>"; };
 		D93F7A1B2135235200ECC50E /* WeChatPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeChatPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93F7A1E2135235200ECC50E /* WeChatPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatPlugin.h; sourceTree = "<group>"; };
 		D93F7A1F2135235200ECC50E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35DDEFAA240F432200D2A753 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				35DDEFAB240F434100D2A753 /* PluginUtils.h */,
+				35DDEFAC240F434100D2A753 /* PluginUtils.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D93F7A112135235200ECC50E = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +83,7 @@
 		D93F7A1D2135235200ECC50E /* WeChatPlugin */ = {
 			isa = PBXGroup;
 			children = (
+				35DDEFAA240F432200D2A753 /* Utils */,
 				D9C2BBAC21831D84009D674F /* DisableUpgrade */,
 				D9A6186B217D6B4000A005FA /* ReceiveMsg */,
 				D93F7A2F21352E0C00ECC50E /* RevokeMsg */,
@@ -142,6 +156,7 @@
 				D9C2AF2F218077D7009D674F /* SKBuiltinString_t.h in Headers */,
 				D9A6186E217D6B5700A005FA /* NSObject+HookReceiveMsg.h in Headers */,
 				D93F7A3821352F1400ECC50E /* XMLReader.h in Headers */,
+				35DDEFAD240F434100D2A753 /* PluginUtils.h in Headers */,
 				D93F7A3221352E4800ECC50E /* NSObject+HookRevoke.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +236,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n# 要注入的的app\napp_name=\"WeChat\"\n# 此framework名字\nframework_name=\"WeChatPlugin\"\napp_bundle_path=\"/Applications/${app_name}.app/Contents/MacOS\"\napp_executable_path=\"${app_bundle_path}/${app_name}\"\napp_executable_backup_path=\"${app_executable_path}_backup\"\nframework_path=\"${app_bundle_path}/${framework_name}.framework\"\n# 备份原始可执行文件\nif [ ! -f \"$app_executable_backup_path\" ]\nthen\ncp \"$app_executable_path\" \"$app_executable_backup_path\"\nfi\ncp -r \"${BUILT_PRODUCTS_DIR}/${framework_name}.framework\" ${app_bundle_path}\n# 注入动态库\n./insert_dylib --all-yes \"${framework_path}/${framework_name}\" \"$app_executable_backup_path\" \"$app_executable_path\"";
+			shellScript = "#!/bin/bash\n# 要注入的的app\napp_name=\"WeChat\"\n# 此framework名字\nframework_name=\"WeChatPlugin\"\napp_bundle_path=\"/Applications/${app_name}.app/Contents/MacOS\"\napp_executable_path=\"${app_bundle_path}/${app_name}\"\napp_executable_backup_path=\"${app_executable_path}_backup\"\nframework_path=\"${app_bundle_path}/${framework_name}.framework\"\n# 备份原始可执行文件\nif [ ! -f \"$app_executable_backup_path\" ]\nthen\ncp \"$app_executable_path\" \"$app_executable_backup_path\"\nfi\ncp -r \"${BUILT_PRODUCTS_DIR}/${framework_name}.framework\" ${app_bundle_path}\n# 注入动态库\n./insert_dylib --all-yes \"${framework_path}/${framework_name}\" \"$app_executable_backup_path\" \"$app_executable_path\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -234,6 +249,7 @@
 				D93F7A3721352F1400ECC50E /* XMLReader.m in Sources */,
 				D9A6186F217D6B5700A005FA /* NSObject+HookReceiveMsg.m in Sources */,
 				D93F7A29213523A300ECC50E /* main.mm in Sources */,
+				35DDEFAE240F434100D2A753 /* PluginUtils.m in Sources */,
 				D9C2BBB021831D99009D674F /* NSObject+HookUpgrade.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,11 +375,11 @@
 		D93F7A242135235200ECC50E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = W3Q56U2D54;
+				DEVELOPMENT_TEAM = ZD2AJ5W293;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -375,6 +391,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leonadev.WeChatPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -384,11 +401,11 @@
 		D93F7A252135235200ECC50E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = W3Q56U2D54;
+				DEVELOPMENT_TEAM = ZD2AJ5W293;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -400,6 +417,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leonadev.WeChatPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

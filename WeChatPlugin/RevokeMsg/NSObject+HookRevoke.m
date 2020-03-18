@@ -10,22 +10,53 @@
 #import "WeChatPlugin.h"
 #import <objc/message.h>
 #import "XMLReader.h"
+#import "PluginUtils.h"
 
 @implementation NSObject (HookRevoke)
 
 #pragma mark - Public
-+ (void)hookRevoke
-{
-    Method oriMethod = class_getInstanceMethod(objc_getClass("MessageService"), @selector(onRevokeMsg:));
-    Method swzMethod = class_getInstanceMethod([self class], @selector(_hook_onRevokeMsg:));
-    if (oriMethod && swzMethod) {
-        method_exchangeImplementations(oriMethod, swzMethod);
++ (void)hookRevoke {
+    
+    if ([PluginUtils isVersionNewerThan:@"2.3.29"]) {
+        hookMethod(objc_getClass("MessageService"),
+                   @selector(FFToNameFavChatZZ:sessionMsgList:),
+                   [self class],
+                   @selector(_hook_FFToNameFavChatZZ:sessionMsgList:)
+                   );
+    } else if ([PluginUtils isVersionNewerThan:@"2.3.22"]) {
+        hookMethod(objc_getClass("MessageService"),
+                   @selector(FFToNameFavChatZZ:),
+                   [self class],
+                   @selector(_hook_onRevokeMsg:)
+                   );
+    } else {
+        hookMethod(objc_getClass("MessageService"),
+                   @selector(onRevokeMsg:),
+                   [self class],
+                   @selector(_hook_onRevokeMsg:)
+                   );
     }
 }
 
 #pragma mark - Private
+- (void)_hook_FFToNameFavChatZZ:(id)msg sessionMsgList:(id)arg2 {
+    id msgStr = msg;
+    if ([msgStr isKindOfClass:objc_getClass("MessageData")]) {
+        msgStr = [msgStr valueForKey:@"msgContent"];
+    }
+    [self _parseRevokeMsg:msgStr msgData:msg arg1:nil arg2:arg2 arg3:nil];
+}
+
 - (void)_hook_onRevokeMsg:(id)msg
 {
+    id msgStr = msg;
+    if ([msgStr isKindOfClass:objc_getClass("MessageData")]) {
+        msgStr = [msgStr valueForKey:@"msgContent"];
+    }
+    [self _parseRevokeMsg:msgStr msgData:msg arg1:nil arg2:nil arg3:nil];
+}
+
+- (void)_parseRevokeMsg:(NSString *)msg msgData:(id)msgData arg1:(id)arg1 arg2:(id)arg2 arg3:(id)arg3 {
     NSRange contentRange = [msg rangeOfString:@"<sysmsg"];
     if (contentRange.length <= 0) {
         // 消息协议不符
@@ -51,7 +82,13 @@
         MessageData *revokeMsgData = [msgService GetMsgData:session svrId:[newmsgid integerValue]];
         if ([revokeMsgData isSendFromSelf]) {
             // 如果是自己撤回的消息，直接调用原方法进行撤回
-            [self _hook_onRevokeMsg:msg];
+            if ([PluginUtils isVersionNewerThan:@"2.3.29"]) {
+                [self _hook_FFToNameFavChatZZ:msgData sessionMsgList:arg2];
+            } else if ([PluginUtils isVersionNewerThan:@"2.3.22"]) {
+                [self _hook_onRevokeMsg:msgData];
+            } else {
+                [self _hook_onRevokeMsg:msgData];
+            }
             return;
         }
         
